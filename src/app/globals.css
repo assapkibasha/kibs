@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #060606;
+  --color-panel: rgba(17, 17, 17, 0.72);
+  --color-panel-solid: #111111;
+  --color-shell: rgba(10, 10, 10, 0.52);
+  --color-shell-strong: rgba(10, 10, 10, 0.78);
+  --color-foreground: #f4f0ea;
+  --color-muted: rgba(244, 240, 234, 0.72);
+  --color-subtle: rgba(244, 240, 234, 0.45);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-track: rgba(255, 255, 255, 0.08);
+  --color-grid: rgba(255, 255, 255, 0.025);
+  --color-accent: #d6a067;
+  --color-accent-glow: rgba(214, 160, 103, 0.18);
+  --color-accent-soft: rgba(214, 160, 103, 0.12);
+  --color-glow: rgba(255, 255, 255, 0.08);
+  --color-shadow: 0 24px 90px rgba(0, 0, 0, 0.32);
+}
+
+html[data-theme="light"] {
+  --color-bg: #f4efe8;
+  --color-panel: rgba(255, 255, 255, 0.72);
+  --color-panel-solid: #ffffff;
+  --color-shell: rgba(255, 255, 255, 0.62);
+  --color-shell-strong: rgba(255, 255, 255, 0.9);
+  --color-foreground: #171514;
+  --color-muted: rgba(23, 21, 20, 0.72);
+  --color-subtle: rgba(23, 21, 20, 0.45);
+  --color-border: rgba(23, 21, 20, 0.12);
+  --color-track: rgba(23, 21, 20, 0.08);
+  --color-grid: rgba(23, 21, 20, 0.03);
+  --color-accent: #b86d31;
+  --color-accent-glow: rgba(184, 109, 49, 0.13);
+  --color-accent-soft: rgba(184, 109, 49, 0.12);
+  --color-glow: rgba(255, 255, 255, 0.4);
+  --color-shadow: 0 24px 90px rgba(108, 80, 52, 0.08);
+}
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-syne);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  font-family: var(--font-manrope), sans-serif;
+  color: var(--color-foreground);
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(214, 160, 103, 0.28);
+  color: white;
+}
+
+.font-display {
+  font-family: var(--font-syne), sans-serif;
+}
+
+.glass-panel {
+  border: 1px solid var(--color-border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+    var(--color-panel);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), var(--color-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border-radius: 9999px;
+  padding: 0.95rem 1.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.button-primary {
+  border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+  background: var(--color-foreground);
+  color: var(--color-bg);
+}
+
+.button-secondary {
+  border: 1px solid var(--color-border);
+  background: var(--color-panel);
+  color: var(--color-foreground);
+}
+
+.button-primary:hover,
+.button-secondary:hover {
+  transform: translateY(-2px);
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+}
+
+.shell-soft {
+  border-color: var(--color-border);
+  background: var(--color-shell);
+  backdrop-filter: blur(14px);
+}
+
+.shell-strong {
+  border-color: var(--color-border);
+  background: var(--color-shell-strong);
+  box-shadow: var(--color-shadow);
+  backdrop-filter: blur(20px);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-panel-solid);
+  color: var(--color-foreground);
+  padding: 0.55rem 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero-shell {
+  border: 1px solid var(--color-border);
+  background:
+    radial-gradient(circle at top, var(--color-glow), transparent 35%),
+    radial-gradient(circle at 85% 15%, var(--color-accent-glow), transparent 22%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 25%),
+    var(--color-shell-strong);
+  box-shadow: var(--color-shadow);
+  backdrop-filter: blur(20px);
+}
+
+.media-card {
+  min-height: 32rem;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 30%),
+    var(--color-panel-solid);
+}
+
+.project-card {
+  display: grid;
+  gap: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 35%),
+    var(--color-panel);
+  padding: 1.25rem;
+  box-shadow: var(--color-shadow);
+  backdrop-filter: blur(18px);
+}
+
+@media (min-width: 1024px) {
+  .project-card {
+    grid-template-columns: minmax(0, 0.92fr) minmax(22rem, 0.88fr);
+    align-items: stretch;
+    padding: 1.5rem;
+  }
+}
+
+.project-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.25rem;
+}
+
+.project-shot {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 1.6rem;
+  background: var(--color-panel-solid);
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-panel);
+  padding: 0.7rem 0.95rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.pricing-card {
+  border: 1px solid var(--color-border);
+  border-radius: 1.75rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 30%),
+    var(--color-panel);
+  padding: 1.6rem;
+  box-shadow: var(--color-shadow);
+}
