@@ -6,6 +6,7 @@ export type FeaturedProject = {
   stack: string[];
   screenshot: string;
   outcome: string;
+  proofPoints: string[];
   accent: string;
 };
 
@@ -13,67 +14,67 @@ export const featuredProjects: FeaturedProject[] = [
   {
     title: "NoBarriers",
     category: "Accessibility platform",
-    description:
-      "A sign language learning experience designed to make deaf inclusion, gamified education, and language access feel modern and welcoming.",
+    description: "Sign language learning with inclusive, gamified UX.",
     url: "https://nobarriers.onrender.com/",
     stack: ["React", "TypeScript", "Accessibility"],
     screenshot: "/projects/nobarriers.png",
-    outcome: "Interactive education interface with inclusive UX",
+    outcome: "Inclusive learning interface",
+    proofPoints: ["Lesson flow", "Inclusive UX", "Live education product"],
     accent: "#1da59a",
   },
   {
     title: "Higura",
     category: "POS + inventory SaaS",
-    description:
-      "AI-powered stock, checkout, and reporting software built for real retail workflows across Rwanda and beyond.",
+    description: "AI-powered stock, checkout, and reporting software.",
     url: "https://www.higura.com/",
     stack: ["Next.js", "SaaS", "Product design"],
     screenshot: "/projects/higura.png",
-    outcome: "Operations software with a clean, trust-first conversion flow",
+    outcome: "Retail operations SaaS",
+    proofPoints: ["Stock + checkout", "Retail reporting", "Live SaaS product"],
     accent: "#15a35d",
   },
   {
     title: "Youth Generation Club",
     category: "NGO / youth platform",
-    description:
-      "A mission-led website for youth empowerment, leadership programs, and community engagement with strong visual storytelling.",
+    description: "Youth empowerment site with program storytelling.",
     url: "https://www.youthgenerationclub.org/",
     stack: ["React", "Brand storytelling", "NGO"],
     screenshot: "/projects/ygc.png",
-    outcome: "Community-focused landing page with event-forward messaging",
+    outcome: "Community landing page",
+    proofPoints: ["Programs + events", "Community trust", "Live NGO platform"],
     accent: "#45d47b",
   },
   {
     title: "Intambwe School System",
     category: "Education management",
-    description:
-      "A school system landing page focused on enrollment, administration, and operational clarity for education stakeholders.",
+    description: "School operations landing page for enrollment and admin.",
     url: "https://intambwe-system.onrender.com/",
     stack: ["Web app", "Education", "Systems"],
     screenshot: "/projects/intambwe.png",
-    outcome: "Clear product positioning for school operations technology",
+    outcome: "School system positioning",
+    proofPoints: ["Admin workflow", "Enrollment path", "School operations"],
     accent: "#2b6fff",
   },
   {
     title: "Eazy1Teck",
     category: "Premium electronics marketplace",
-    description:
-      "A polished storefront for phones and devices, built around modern commerce presentation and direct product discovery.",
+    description: "Premium storefront for phones and devices.",
     url: "https://eazy1teck.vercel.app/",
     stack: ["Next.js", "Commerce", "UI systems"],
     screenshot: "/projects/eazy1teck.png",
-    outcome: "High-contrast retail experience with premium product framing",
+    outcome: "High-contrast commerce UX",
+    proofPoints: ["Product browsing", "Retail storefront", "Commerce path"],
     accent: "#f5bb00",
   },
   {
     title: "Uwatese Decor",
     category: "Wedding and events brand",
-    description:
-      "A visually rich decor and clothes rental site that brings wedding services, event styling, and trust signals into one premium showcase.",
+    description: "Decor and rental site for weddings and events.",
     url: "https://uwatese-decor.vercel.app/",
     stack: ["Brand experience", "Local business", "Lead generation"],
     screenshot: "/projects/uwatese.png",
-    outcome: "Hospitality-grade presentation for services and booking intent",
+    outcome: "Service showcase with booking intent",
+    proofPoints: ["Service inquiry", "Booking intent", "Event services"],
     accent: "#f37d1f",
   },
 ];
@@ -202,7 +203,7 @@ export const pricingTiers = [
     range: "350,000 - 900,000 RWF",
     usd: "~$250 - 650 USD",
     timeline: "1 - 2 weeks",
-    fits: "Strong for personal brands, NGOs, events, local service businesses, and polished single-purpose marketing sites.",
+    fits: "For portfolios, NGOs, events, and service sites.",
     bullets: [
       "Custom design system, responsive build, deployment",
       "Clear conversion structure, contact forms, SEO basics",
@@ -215,7 +216,7 @@ export const pricingTiers = [
     range: "1,200,000 - 3,500,000 RWF",
     usd: "~$850 - 2,500 USD",
     timeline: "3 - 6 weeks",
-    fits: "Good for stores, booking systems, dashboards, inventory tools, and multi-page business products that need real workflows.",
+    fits: "For stores, booking systems, dashboards, and inventory tools.",
     bullets: [
       "Authentication, dashboards, CRUD flows, databases, admin logic",
       "Payment or commerce-ready foundations when needed",
@@ -228,7 +229,7 @@ export const pricingTiers = [
     range: "4,000,000 - 12,000,000+ RWF",
     usd: "~$2,800 - 8,500+ USD",
     timeline: "6 - 14 weeks",
-    fits: "For platforms with multiple user roles, integrations, subscriptions, APIs, and long-term product ambition.",
+    fits: "For SaaS platforms, roles, integrations, APIs, and scale.",
     bullets: [
       "Architecture planning, multi-user flows, scale-minded backend work",
       "Premium UX, stronger documentation, and production-focused delivery",

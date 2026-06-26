@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-27T00:11:31.7090530+02:00",
+  "title": "Design System: Ntsinzi Francois Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "command-black": {
+        "role": "neutral",
+        "displayName": "Command Black",
+        "canonical": "#000000",
+        "tonalRamp": ["#000000", "#050505", "#080808", "#101325", "#1a1d2f", "#34384d", "#686d85", "#fffdf6"]
+      },
+      "console-ink": {
+        "role": "neutral",
+        "displayName": "Console Ink",
+        "canonical": "#101325",
+        "tonalRamp": ["#05060c", "#080a14", "#101325", "#1a1f39", "#313850", "#596176", "#8f96ae", "#cfd2df"]
+      },
+      "command-yellow": {
+        "role": "primary",
+        "displayName": "Command Yellow",
+        "canonical": "#ffd300",
+        "tonalRamp": ["#2a2100", "#5a4800", "#8b7000", "#c49d00", "#ffd300", "#ffdf40", "#ffec8a", "#fff7cc"]
+      },
+      "signal-green": {
+        "role": "secondary",
+        "displayName": "Signal Green",
+        "canonical": "#a6ff3d",
+        "tonalRamp": ["#132300", "#274800", "#4c800f", "#72ba22", "#a6ff3d", "#c3ff78", "#dbffad", "#f0ffdc"]
+      },
+      "system-blue": {
+        "role": "secondary",
+        "displayName": "System Blue",
+        "canonical": "#66c7ff",
+        "tonalRamp": ["#001d2e", "#003b5c", "#006696", "#2398d5", "#66c7ff", "#95d8ff", "#c3ebff", "#e7f7ff"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Command Display",
+        "purpose": "Hero commands and major conversion statements."
+      },
+      "body": {
+        "displayName": "Dense Product Body",
+        "purpose": "Project descriptions, pricing context, and concise value copy."
+      },
+      "label": {
+        "displayName": "Mono Status Label",
+        "purpose": "Commands, status markers, metadata, and technical labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambient-glow",
+        "value": "0 24px 90px rgba(255, 211, 0, 0.14)",
+        "purpose": "Priority hero or CTA energy, used sparingly."
+      },
+      {
+        "name": "panel-lift",
+        "value": "0 18px 48px rgba(0, 0, 0, 0.28)",
+        "purpose": "Featured cards and active surfaces only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-standard",
+        "value": "250ms ease",
+        "purpose": "Default hover and focus transitions."
+      },
+      {
+        "name": "system-loop",
+        "value": "reduced-motion guarded keyframes",
+        "purpose": "Hero command and system-node animation where it clarifies technical energy."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Hire Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Sharp yellow action button for contact, hiring, and active selection.",
+      "html": "<button class=\"ds-btn-primary\">Hire Me</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; border: 0; border-radius: 4px; background: #ffd300; color: #000000; padding: 0 1.25rem; font-family: Manrope, Arial, sans-serif; font-weight: 900; cursor: pointer; transition: transform 250ms ease, filter 250ms ease; } .ds-btn-primary:hover { transform: translateY(-1px); filter: brightness(1.04); } .ds-btn-primary:focus-visible { outline: 3px solid #66c7ff; outline-offset: 3px; }"
+    },
+    {
+      "name": "Icon Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Transparent square icon control for search, menu, and utility actions.",
+      "html": "<button class=\"ds-icon-button\" aria-label=\"Search\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"11\" cy=\"11\" r=\"7\"></circle><path d=\"m20 20-3.5-3.5\"></path></svg></button>",
+      "css": ".ds-icon-button { display: grid; width: 2.8rem; height: 2.8rem; place-items: center; border: 0; border-radius: 4px; background: transparent; color: #fffdf6; cursor: pointer; transition: background 250ms ease, color 250ms ease; } .ds-icon-button:hover { background: rgba(255,255,255,0.08); color: #ffd300; } .ds-icon-button:focus-visible { outline: 3px solid #ffd300; outline-offset: 3px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Dark bordered search field for filtering project evidence.",
+      "html": "<label class=\"ds-search\"><span>Search projects</span><input placeholder=\"Try SaaS, NGO, commerce\" /></label>",
+      "css": ".ds-search { display: grid; gap: 0.5rem; color: #cfd2df; font-family: Manrope, Arial, sans-serif; font-size: 0.9rem; font-weight: 800; } .ds-search input { min-height: 3.4rem; border: 1px solid rgba(255,255,255,0.22); border-radius: 8px; background: #12162b; color: #fffdf6; padding: 1rem 1.15rem; font: inherit; } .ds-search input::placeholder { color: #cfd2df; } .ds-search input:focus-visible { outline: 3px solid #ffd300; outline-offset: 3px; }"
+    },
+    {
+      "name": "Project Proof Card",
+      "kind": "card",
+      "refersTo": "card-console",
+      "description": "Dark proof surface for a project screenshot, outcome, and stack.",
+      "html": "<article class=\"ds-project-card\"><span>Featured case study</span><h3>Business system launch</h3><p>Real project outcomes, technical stack, and proof should carry the persuasion.</p></article>",
+      "css": ".ds-project-card { border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; background: linear-gradient(135deg, #050505, #12162b); color: #fffdf6; padding: 1.5rem; font-family: Manrope, Arial, sans-serif; } .ds-project-card span { color: #ffd300; font-family: 'Roboto Mono', monospace; font-size: 0.78rem; font-weight: 900; } .ds-project-card h3 { margin: 1rem 0 0.5rem; font-size: 1.45rem; line-height: 1.1; } .ds-project-card p { margin: 0; color: #cfd2df; line-height: 1.7; }"
+    },
+    {
+      "name": "Sticky Portfolio Nav",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Dark command bar with concise links and a primary hire action.",
+      "html": "<nav class=\"ds-nav\"><strong>N</strong><a>Work</a><a>Skills</a><a>Pricing</a><button>Hire Me</button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1.25rem; min-height: 5.4rem; border-bottom: 1px solid rgba(255,255,255,0.12); background: rgba(16,19,37,0.96); color: #fffdf6; padding: 0 2rem; font-family: Manrope, Arial, sans-serif; } .ds-nav strong { display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border: 3px solid #fffdf6; font-family: 'Roboto Mono', monospace; } .ds-nav a { font-weight: 800; } .ds-nav button { margin-left: auto; min-height: 2.75rem; border: 0; border-radius: 4px; background: #ffd300; color: #000000; padding: 0 1.25rem; font-weight: 900; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Command Center Portfolio",
+    "overview": "The system should feel like a high-contrast developer command center built for selling real product capability: dark surfaces, sharp yellow action, mono labels, proof-heavy project framing, and animated technical structures that point back to business outcomes. It is brand-first, but the brand is not abstract decoration; every console, orbit, filter, and pricing block should make Ntsinzi feel more capable to hire.",
+    "keyCharacteristics": [
+      "High-contrast dark canvas with yellow as the decisive action color.",
+      "Mono labels and command-like copy for technical credibility.",
+      "Real screenshots and project outcomes as the primary trust layer.",
+      "Compact, rectilinear UI with small radii and strong borders.",
+      "Motion should feel purposeful and system-like, never ornamental."
+    ],
+    "rules": [
+      {
+        "name": "The Yellow Means Action Rule",
+        "body": "Command Yellow is for action, selection, and decisive emphasis. Do not scatter it as decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Purple-Blue AI Gradient Rule",
+        "body": "Purple-blue gradient hero treatments are prohibited. The system uses black, blueblack, yellow, and controlled signal accents.",
+        "section": "colors"
+      },
+      {
+        "name": "The Command Label Rule",
+        "body": "Mono text earns its place only when it reads as a command, status, metric, or technical marker. Do not use mono for ordinary paragraphs.",
+        "section": "typography"
+      },
+      {
+        "name": "The Border Before Shadow Rule",
+        "body": "Prefer a crisp border and tonal shift before adding shadow. If a card needs both, the shadow must support hierarchy, not decorate.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep Command Yellow tied to action, active selection, and decisive emphasis.",
+      "Do lead with real shipped work, screenshots, outcomes, and pricing clarity.",
+      "Do keep dark surfaces readable with Warm White or Muted Text that meets WCAG AA.",
+      "Do use motion to clarify systems, hierarchy, or progress.",
+      "Do preserve the compact code-console signature: sharp frames, strong borders, mono labels, and high contrast."
+    ],
+    "donts": [
+      "Don't use generic developer portfolio templates.",
+      "Don't use vague \"modern SaaS\" page structure as the default.",
+      "Don't use soft glassmorphism as the visual foundation.",
+      "Don't use purple-blue AI gradients.",
+      "Don't add decorative code noise with no business meaning.",
+      "Don't turn the portfolio into a resume pasted into cards.",
+      "Don't make the site feel like a course platform unless that metaphor is serving the portfolio narrative directly."
+    ]
+  }
+}

@@ -3,28 +3,54 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
-  BadgeCheck,
   BarChart3,
   Blocks,
-  BriefcaseBusiness,
-  Code2,
+  CloudCog,
   Cpu,
   Database,
+  GitBranch,
   GraduationCap,
+  Kanban,
   LayoutGrid,
   Menu,
   Phone,
   Search,
-  ShieldCheck,
+  ServerCog,
   Smartphone,
-  Sparkles,
   Terminal,
-  UsersRound,
   X,
   Zap,
 } from "lucide-react";
+import type { SimpleIcon } from "simple-icons";
+import {
+  siBootstrap,
+  siCss,
+  siDart,
+  siFlutter,
+  siFramer,
+  siGithub,
+  siGreensock,
+  siHtml5,
+  siJavascript,
+  siLaravel,
+  siLinux,
+  siMongodb,
+  siMysql,
+  siNextdotjs,
+  siNodedotjs,
+  siPhp,
+  siPostgresql,
+  siPrisma,
+  siPython,
+  siReact,
+  siSequelize,
+  siTailwindcss,
+  siTypescript,
+  siVuedotjs,
+} from "simple-icons";
 import { featuredProjects, pricingTiers, skillGroups } from "@/data/portfolio";
 
 const subjects = [
@@ -33,13 +59,7 @@ const subjects = [
   { label: "Frontend craft", icon: LayoutGrid },
   { label: "SaaS products", icon: Cpu },
   { label: "Dashboards", icon: BarChart3 },
-  { label: "Databases", icon: Database },
-  { label: "Product design", icon: Sparkles },
-  { label: "Client delivery", icon: BriefcaseBusiness },
-  { label: "Accessibility", icon: ShieldCheck },
-  { label: "Team training", icon: UsersRound },
   { label: "Launch support", icon: Zap },
-  { label: "Code foundations", icon: Code2 },
 ];
 
 const addedSkills = [
@@ -54,6 +74,91 @@ const addedSkills = [
 
 const existingSkillItems = skillGroups.flatMap((group) => group.items);
 const skillOrbit = Array.from(new Set([...existingSkillItems, ...addedSkills]));
+
+type SkillVisual =
+  | { kind: "brand"; icon: SimpleIcon }
+  | { kind: "lucide"; icon: LucideIcon };
+
+const skillVisuals: Record<string, SkillVisual> = {
+  React: { kind: "brand", icon: siReact },
+  "Next.js": { kind: "brand", icon: siNextdotjs },
+  TypeScript: { kind: "brand", icon: siTypescript },
+  CSS: { kind: "brand", icon: siCss },
+  "Tailwind CSS": { kind: "brand", icon: siTailwindcss },
+  Bootstrap: { kind: "brand", icon: siBootstrap },
+  GSAP: { kind: "brand", icon: siGreensock },
+  "Framer Motion": { kind: "brand", icon: siFramer },
+  Flutter: { kind: "brand", icon: siFlutter },
+  Dart: { kind: "brand", icon: siDart },
+  "Node.js": { kind: "brand", icon: siNodedotjs },
+  PHP: { kind: "brand", icon: siPhp },
+  Laravel: { kind: "brand", icon: siLaravel },
+  Python: { kind: "brand", icon: siPython },
+  PostgreSQL: { kind: "brand", icon: siPostgresql },
+  MongoDB: { kind: "brand", icon: siMongodb },
+  Prisma: { kind: "brand", icon: siPrisma },
+  Sequelize: { kind: "brand", icon: siSequelize },
+  DevOps: { kind: "lucide", icon: CloudCog },
+  Linux: { kind: "brand", icon: siLinux },
+  "CI/CD": { kind: "lucide", icon: GitBranch },
+  "Deployment architecture": { kind: "lucide", icon: ServerCog },
+  GitHub: { kind: "brand", icon: siGithub },
+  MySQL: { kind: "brand", icon: siMysql },
+  NoSQL: { kind: "lucide", icon: Database },
+  JavaScript: { kind: "brand", icon: siJavascript },
+  HTML: { kind: "brand", icon: siHtml5 },
+  "Windows Server Management": { kind: "lucide", icon: ServerCog },
+  "Vue.js": { kind: "brand", icon: siVuedotjs },
+  "Project Management": { kind: "lucide", icon: Kanban },
+};
+
+const pricingCues: Record<string, string> = {
+  Starter: "Visibility",
+  Growth: "Most requested",
+  Premium: "Platform",
+};
+
+function SkillIconTile({
+  skill,
+  compact = false,
+}: {
+  skill: string;
+  compact?: boolean;
+}) {
+  const visual = skillVisuals[skill];
+  const className = `skill-logo-tile${compact ? " is-compact" : ""}`;
+
+  return (
+    <span className={className} title={skill} aria-label={skill}>
+      {visual?.kind === "brand" ? (
+        <svg
+          aria-hidden="true"
+          style={
+            {
+              "--brand-color": `#${visual.icon.hex}`,
+            } as CSSProperties
+          }
+          viewBox="0 0 24 24"
+        >
+          <path d={visual.icon.path} />
+        </svg>
+      ) : visual?.kind === "lucide" ? (
+        (() => {
+          const Icon = visual.icon;
+          return (
+            <Icon
+              aria-hidden="true"
+              size={compact ? 20 : 25}
+              strokeWidth={1.9}
+            />
+          );
+        })()
+      ) : (
+        <b aria-hidden="true">{skill.slice(0, 2).toUpperCase()}</b>
+      )}
+    </span>
+  );
+}
 
 const trustedTools = [
   "React",
@@ -73,17 +178,17 @@ const heroCommands = ["/Ntsinzi", "/start-now", "/ship-products", "/launch-fast"
 const skillCapabilities = [
   {
     title: "Product interfaces",
-    proof: "Premium landing pages, dashboards, commerce flows, and admin screens.",
+    proof: "Landing pages, dashboards, commerce flows, and admin screens.",
     tools: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
   },
   {
     title: "Full-stack systems",
-    proof: "Business logic, databases, APIs, authentication, and operational workflows.",
+    proof: "APIs, auth, databases, and workflow logic.",
     tools: ["Node.js", "Laravel", "Python", "PostgreSQL"],
   },
   {
     title: "Mobile and launch",
-    proof: "Cross-platform app foundations, deployment support, DevOps, and client handoff.",
+    proof: "Flutter apps, deployment, DevOps, and handoff.",
     tools: ["Flutter", "Dart", "GitHub", "DevOps"],
   },
 ];
@@ -91,30 +196,15 @@ const skillCapabilities = [
 const valueProps = [
   {
     title: "Turn ideas into shipped products",
-    copy: "Discovery, design, frontend, backend, deployment, and launch support handled as one product-minded workflow.",
+    copy: "Scope, design, build, deploy.",
   },
   {
     title: "Build systems people can actually use",
-    copy: "Dashboards, commerce flows, school systems, NGO platforms, and service websites shaped around real business pressure.",
+    copy: "Dashboards, stores, school systems, NGO platforms.",
   },
   {
     title: "Make the work feel premium",
-    copy: "Sharp hierarchy, confident contrast, useful motion, and code that stays maintainable after the first launch.",
-  },
-];
-
-const platformFeatures = [
-  {
-    title: "Guided project thinking",
-    copy: "Every build starts with scope, goals, users, content, and the technical path that makes delivery realistic.",
-  },
-  {
-    title: "Hands-on execution",
-    copy: "I move from wireframe to interface to data model to deployment without losing sight of the user experience.",
-  },
-  {
-    title: "After-launch care",
-    copy: "Support, iteration, analytics, bug fixes, and improvements are available when the product needs to keep growing.",
+    copy: "Sharp UI, useful motion, maintainable code.",
   },
 ];
 
@@ -139,6 +229,8 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const heroProof = featuredProjects[1] ?? featuredProjects[0];
+  const heroProofPoint = heroProof.proofPoints[0];
 
   const filteredProjects = useMemo(() => {
     return featuredProjects.filter((project) => {
@@ -224,20 +316,25 @@ export default function Home() {
               <span />
               <span />
             </div>
-            <div className="hero-code hero-code-one">Build with</div>
-            <div className="hero-code hero-code-two rotating-command" aria-label="Ntsinzi start now ship products launch fast">
-              {heroCommands.map((command, index) => (
-                <span
-                  key={command}
-                  style={{ "--command-index": index } as CSSProperties}
-                >
-                  {command}
-                </span>
-              ))}
-            </div>
+            <span className="hero-status">Available for focused builds</span>
+            <h1 className="hero-title">
+              <span className="hero-code hero-code-one">Build with</span>
+              <span
+                className="hero-code hero-code-two rotating-command"
+                aria-label="Ntsinzi start now ship products launch fast"
+              >
+                {heroCommands.map((command, index) => (
+                  <span
+                    key={command}
+                    style={{ "--command-index": index } as CSSProperties}
+                  >
+                    {command}
+                  </span>
+                ))}
+              </span>
+            </h1>
             <p>
-              Full-stack developer for web apps, mobile products, dashboards,
-              business systems, and launch-ready digital experiences.
+              Web, mobile, dashboards, and business systems built to launch.
             </p>
           </div>
           <div className="hero-system" aria-label="Animated developer system">
@@ -266,22 +363,34 @@ export default function Home() {
         </div>
 
         <div className="hero-card">
+          <a
+            className="hero-proof-card"
+            href={heroProof.url}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <Image
+              src={heroProof.screenshot}
+              alt={`${heroProof.title} live project screenshot`}
+              width={220}
+              height={140}
+              sizes="220px"
+            />
+            <span>Live proof</span>
+            <strong>{heroProof.title}</strong>
+            <small>{heroProofPoint}</small>
+          </a>
           <div className="signup-panel">
+            <a className="more-button" href="#contact">
+              Start a build
+            </a>
             <a className="google-button" href="#projects">
               <Terminal size={18} />
-              Explore my work
-            </a>
-            <span>OR</span>
-            <a className="more-button" href="#contact">
-              More ways to work together
+              View work
             </a>
           </div>
           <div>
-            <p>
-              Grow your product with a developer who builds web apps, mobile
-              experiences, dashboards, and premium digital systems for serious
-              teams.
-            </p>
+            <p>Scoped. Built. Launched.</p>
           </div>
         </div>
 
@@ -289,7 +398,7 @@ export default function Home() {
           <span>Built with tools clients ask for</span>
           <div>
             {trustedTools.map((tool) => (
-                <strong key={tool}>{tool}</strong>
+              <SkillIconTile compact key={tool} skill={tool} />
               ))}
           </div>
         </div>
@@ -304,8 +413,7 @@ export default function Home() {
             <div>
               <h2>Transform your idea with full-stack product delivery</h2>
               <p>
-                From landing pages to SaaS platforms, I help businesses turn
-                scattered requirements into clear, usable software.
+                Clear scope, sharp interface, working software.
               </p>
             </div>
             <a href="#contact" aria-label="Contact Ntsinzi">
@@ -313,23 +421,13 @@ export default function Home() {
             </a>
           </div>
 
-          <h2 className="code-heading">Build skills that stand out</h2>
-          <div className="tab-row" role="tablist" aria-label="Portfolio skills">
-            <button className="active-tab" type="button">
-              Available skills
-            </button>
-            <button type="button">Project paths</button>
-          </div>
+          <h2 className="code-heading">Ship-ready capabilities</h2>
 
           <div className="skills-proof-board" aria-label="Portfolio skill capabilities">
             <div className="skills-proof-intro">
-              <span>{skillOrbit.length} skills available</span>
-              <h3>Skills grouped by what they help you ship.</h3>
-              <p>
-                Modern portfolios work better when skills are tied to outcomes,
-                not just dropped into a long list. These are the build paths I
-                can cover from idea to launch.
-              </p>
+              <span>Core build stack</span>
+              <h3>Stack coverage for real launches.</h3>
+              <p>Plan it. Build it. Keep it running.</p>
             </div>
 
             <div className="skills-capability-grid">
@@ -339,7 +437,7 @@ export default function Home() {
                   <p>{capability.proof}</p>
                   <div>
                     {capability.tools.map((tool) => (
-                      <strong key={tool}>{tool}</strong>
+                      <SkillIconTile compact key={tool} skill={tool} />
                     ))}
                   </div>
                 </article>
@@ -347,8 +445,8 @@ export default function Home() {
             </div>
 
             <div className="skills-tool-cloud">
-              {skillOrbit.map((skill) => (
-                <span key={skill}>{skill}</span>
+              {skillOrbit.slice(0, 18).map((skill) => (
+                <SkillIconTile key={skill} skill={skill} />
               ))}
             </div>
           </div>
@@ -367,11 +465,8 @@ export default function Home() {
               <span>
                 <ArrowRight size={25} />
               </span>
-              <h3>Learn my build style</h3>
-              <p>
-                Review real work, stacks, outcomes, and the kind of products I
-                can help you launch.
-              </p>
+              <h3>Review delivery proof</h3>
+              <p>Live projects, real stacks, clear outcomes.</p>
             </div>
             <a href="#projects" aria-label="View projects">
               <ArrowRight size={44} />
@@ -383,10 +478,10 @@ export default function Home() {
       <section id="projects" className="search-section section-pad">
         <div className="section-shell">
           <h2 className="code-heading centered">
-            No matter your goal, there is a build for you
+            Shipped work. Real proof.
           </h2>
           <label className="project-search">
-            <span>What kind of project do you need?</span>
+            <span>Find a project type</span>
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -401,6 +496,7 @@ export default function Home() {
                 key={filter}
                 className={activeFilter === filter ? "is-active" : ""}
                 type="button"
+                aria-pressed={activeFilter === filter}
                 onClick={() => setActiveFilter(filter)}
               >
                 {filter}
@@ -409,7 +505,7 @@ export default function Home() {
           </div>
 
           <div className="section-title-row" id="work">
-            <h3>Top projects</h3>
+            <h3>Shipped work</h3>
             <a href="#contact">
               Start a project <ArrowRight size={18} />
             </a>
@@ -436,6 +532,11 @@ export default function Home() {
                       <span key={tag}>{tag}</span>
                     ))}
                   </div>
+                  <ul className="project-proof-list">
+                    {featuredProject.proofPoints.slice(0, 2).map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
                   <strong>
                     View live project <ArrowRight size={18} />
                   </strong>
@@ -477,6 +578,11 @@ export default function Home() {
                       </span>
                       <h4>{project.title}</h4>
                       <p>{project.outcome}</p>
+                      <ul className="project-proof-list compact">
+                        {project.proofPoints.slice(0, 2).map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
                       <small>{project.stack.slice(0, 3).join(" + ")}</small>
                     </div>
                   </a>
@@ -485,8 +591,7 @@ export default function Home() {
                   <span>Premium build slot</span>
                   <h4>Start yours next.</h4>
                   <p>
-                    Bring the idea, the business goal, or the messy brief. I can
-                    shape it into a polished product people can trust.
+                    Bring the idea. I will shape the build.
                   </p>
                   <strong>
                     Plan your build <ArrowRight size={18} />
@@ -504,12 +609,12 @@ export default function Home() {
       </section>
 
       <section id="process" className="experience-section section-pad">
-        <div className="section-shell two-column">
-          <div>
+        <div className="section-shell">
+          <div className="process-head">
             <p className="eyebrow">The experience</p>
-            <h2 className="code-heading">Designed for progress</h2>
+            <h2 className="code-heading">From brief to launch</h2>
           </div>
-          <div className="value-stack">
+          <div className="value-stack launch-pipeline">
             {valueProps.map((item, index) => (
               <article key={item.title}>
                 <span>0{index + 1}</span>
@@ -521,47 +626,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="platform-section section-pad">
-        <div className="section-shell">
-          <p className="eyebrow">The platform</p>
-          <h2 className="code-heading">Learn by building</h2>
-          <div className="platform-grid">
-            <div className="terminal-card">
-              <div className="terminal-top">
-                <span />
-                <span />
-                <span />
-              </div>
-              <pre>{`const portfolio = {
-  developer: "Ntsinzi Francois",
-  focus: ["web apps", "mobile", "systems"],
-  promise: "premium products that ship"
-};`}</pre>
-            </div>
-            {platformFeatures.map((feature) => (
-              <article key={feature.title} className="feature-card">
-                <BadgeCheck size={28} />
-                <h3>{feature.title}</h3>
-                <p>{feature.copy}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="pricing" className="pricing-section section-pad">
         <div className="section-shell">
           <p className="eyebrow">Plans</p>
           <h2 className="code-heading">Choose your build path</h2>
+          <p className="pricing-bridge">
+            Not sure which tier fits? Start with the project goal. I will shape
+            the scope.
+          </p>
           <div className="pricing-grid">
             {pricingTiers.map((tier) => (
-              <article key={tier.name} className="price-card">
-                <span>{tier.name}</span>
+              <article
+                key={tier.name}
+                className={`price-card ${tier.name === "Growth" ? "is-recommended" : ""}`}
+              >
+                <div className="price-card-head">
+                  <span>{tier.name}</span>
+                  <em>{pricingCues[tier.name]}</em>
+                </div>
                 <h3>{tier.label}</h3>
-                <strong>{tier.range}</strong>
+                <div className="price-range">
+                  <strong>{tier.range}</strong>
+                  <small>
+                    {tier.usd} / {tier.timeline}
+                  </small>
+                </div>
                 <p>{tier.fits}</p>
                 <a href="#contact">
-                  Discuss this path <ArrowRight size={18} />
+                  Discuss path <ArrowRight size={18} />
                 </a>
               </article>
             ))}
@@ -575,9 +667,12 @@ export default function Home() {
             <p className="eyebrow">Ready when you are</p>
             <h2 className="code-heading">Start your next build</h2>
             <p>
-              Tell me what you want to launch, what exists today, and what would
-              make the project successful. I will help you shape the path.
+              Tell me what you want to launch. I will help shape the path.
             </p>
+            <blockquote>
+              I work best with clients who need clarity, speed, and software
+              that survives launch.
+            </blockquote>
           </div>
           <div className="contact-actions">
             <a href="mailto:ntsinzifrancois@gmail.com">
