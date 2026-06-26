@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Manrope, Syne } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Manrope, Roboto_Mono } from "next/font/google";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
@@ -9,15 +9,20 @@ const manrope = Manrope({
   subsets: ["latin"],
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Ntsinzi Francois | Full Stack Developer",
+  title: "Ntsinzi Francois | Developer Portfolio",
   description:
-    "Cinematic developer portfolio for Ntsinzi Francois, a Full Stack Developer, Flutter Developer, and Creative Frontend Engineer.",
+    "Codecademy-inspired portfolio for Ntsinzi Francois, a Full Stack Developer, Flutter Developer, and Creative Frontend Engineer.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -28,9 +33,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${syne.variable} h-full scroll-smooth antialiased`}
+      className={`${manrope.variable} ${robotoMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full bg-[var(--color-bg)] text-[var(--color-foreground)]">
+      <body className="min-h-full bg-[var(--cc-black)] text-[var(--cc-white)]">
         <ThemeProvider>
           <SmoothScrollProvider>{children}</SmoothScrollProvider>
         </ThemeProvider>
