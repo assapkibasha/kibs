@@ -562,9 +562,9 @@ input {
 
 .trusted-strip {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
   justify-items: center;
-  padding: 4rem 0 0;
+  padding: clamp(3rem, 7vw, 4.75rem) 0 0.4rem;
   color: var(--cc-muted);
 }
 
@@ -576,17 +576,23 @@ input {
 }
 
 .trusted-strip div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.72rem;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 3rem));
+  gap: 0.8rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--cc-soft-border);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(102, 199, 255, 0.08), transparent 65%),
+    rgba(8, 10, 20, 0.74);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .skills-proof-board {
   position: relative;
   display: grid;
   grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
-  gap: 1rem;
+  gap: 1.2rem;
   align-items: stretch;
   overflow: hidden;
   border: 1px solid var(--cc-soft-border);
@@ -595,7 +601,7 @@ input {
     radial-gradient(circle at 20% 20%, rgba(255, 211, 0, 0.12), transparent 28%),
     radial-gradient(circle at 82% 72%, rgba(102, 199, 255, 0.11), transparent 34%),
     rgba(0, 0, 0, 0.38);
-  padding: 1.25rem;
+  padding: 1.35rem;
 }
 
 .skills-proof-intro {
@@ -635,25 +641,25 @@ input {
 .skills-capability-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 .skills-capability-card {
   display: grid;
   align-content: space-between;
-  gap: 1rem;
-  min-height: 16rem;
+  gap: 1.15rem;
+  min-height: 17rem;
   border: 1px solid var(--cc-soft-border);
   border-radius: 8px;
   background: var(--cc-panel);
-  padding: 1rem;
+  padding: 1.1rem;
 }
 
-.skills-capability-card div,
-.skills-tool-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.skills-capability-card div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 2.85rem));
+  gap: 0.68rem;
+  justify-content: start;
 }
 
 .skills-capability-card strong {
@@ -669,9 +675,12 @@ input {
 
 .skills-tool-cloud {
   grid-column: 1 / -1;
-  align-items: center;
-  gap: 0.72rem;
-  padding-top: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 3.55rem));
+  gap: 0.82rem;
+  justify-content: start;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .skill-logo-tile {
@@ -683,13 +692,28 @@ input {
   border: 1px solid var(--cc-soft-border);
   border-radius: 8px;
   background:
-    linear-gradient(180deg, var(--cc-hover), transparent 52%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--brand-color, var(--cc-green)) 18%, transparent),
+      transparent 58%
+    ),
     var(--cc-black);
   color: var(--brand-color, var(--cc-green));
   transition:
     border-color 180ms ease,
     background-color 180ms ease,
     transform 180ms ease;
+}
+
+.skill-logo-tile.has-dark-brand {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--brand-color) 7%, transparent),
+      transparent 58%
+    ),
+    var(--cc-white);
+  border-color: color-mix(in srgb, var(--brand-color) 18%, var(--cc-white));
 }
 
 .skill-logo-tile:hover {
@@ -701,8 +725,8 @@ input {
 .skill-logo-tile svg {
   width: 1.68rem;
   height: 1.68rem;
-  fill: currentColor;
-  stroke: currentColor;
+  fill: var(--brand-color, currentColor);
+  stroke: var(--brand-color, currentColor);
 }
 
 .skill-logo-tile.is-compact {
@@ -721,6 +745,39 @@ input {
   font-family: var(--font-mono), monospace;
   font-size: 0.82rem;
   font-weight: 950;
+}
+
+.trusted-strip .skill-logo-tile.is-compact {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 8px;
+}
+
+.trusted-strip .skill-logo-tile.is-compact svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.skills-capability-card .skill-logo-tile.is-compact {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 7px;
+}
+
+.skills-capability-card .skill-logo-tile.is-compact svg {
+  width: 1.34rem;
+  height: 1.34rem;
+}
+
+.skills-tool-cloud .skill-logo-tile {
+  width: 3.55rem;
+  height: 3.55rem;
+  border-radius: 10px;
+}
+
+.skills-tool-cloud .skill-logo-tile svg {
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 .compact-subjects {
@@ -1659,6 +1716,23 @@ input {
     padding: 0.85rem;
   }
 
+  .trusted-strip {
+    gap: 0.85rem;
+    padding-top: 2.5rem;
+  }
+
+  .trusted-strip div {
+    width: min(100%, 23rem);
+    grid-template-columns: repeat(auto-fit, minmax(2.85rem, 1fr));
+    gap: 0.65rem;
+    padding: 0.8rem;
+  }
+
+  .trusted-strip .skill-logo-tile.is-compact {
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+
   .skills-proof-intro,
   .skills-capability-card {
     min-height: auto;
@@ -1666,9 +1740,21 @@ input {
   }
 
   .skills-tool-cloud {
-    max-height: 18rem;
-    overflow: auto;
-    padding-right: 0.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+    gap: 0.7rem;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .skills-capability-card div {
+    grid-template-columns: repeat(auto-fit, minmax(2.7rem, 1fr));
+    gap: 0.6rem;
+  }
+
+  .skills-tool-cloud .skill-logo-tile {
+    width: 100%;
+    height: 3.2rem;
   }
 
   .builder-card > div {

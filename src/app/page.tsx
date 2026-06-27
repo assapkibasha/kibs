@@ -118,6 +118,16 @@ const pricingCues: Record<string, string> = {
   Premium: "Platform",
 };
 
+function isDarkBrandColor(hex: string) {
+  const normalized = hex.replace("#", "");
+  const red = Number.parseInt(normalized.slice(0, 2), 16);
+  const green = Number.parseInt(normalized.slice(2, 4), 16);
+  const blue = Number.parseInt(normalized.slice(4, 6), 16);
+  const luminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue) / 255;
+
+  return luminance < 0.18;
+}
+
 function SkillIconTile({
   skill,
   compact = false,
@@ -127,19 +137,26 @@ function SkillIconTile({
 }) {
   const visual = skillVisuals[skill];
   const className = `skill-logo-tile${compact ? " is-compact" : ""}`;
+  const tileStyle =
+    visual?.kind === "brand"
+      ? ({
+          "--brand-color": `#${visual.icon.hex}`,
+        } as CSSProperties)
+      : undefined;
+  const darkBrandClass =
+    visual?.kind === "brand" && isDarkBrandColor(visual.icon.hex)
+      ? " has-dark-brand"
+      : "";
 
   return (
-    <span className={className} title={skill} aria-label={skill}>
+    <span
+      className={`${className}${darkBrandClass}`}
+      style={tileStyle}
+      title={skill}
+      aria-label={skill}
+    >
       {visual?.kind === "brand" ? (
-        <svg
-          aria-hidden="true"
-          style={
-            {
-              "--brand-color": `#${visual.icon.hex}`,
-            } as CSSProperties
-          }
-          viewBox="0 0 24 24"
-        >
+        <svg aria-hidden="true" viewBox="0 0 24 24">
           <path d={visual.icon.path} />
         </svg>
       ) : visual?.kind === "lucide" ? (
