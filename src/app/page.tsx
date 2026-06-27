@@ -21,6 +21,7 @@ import {
   ServerCog,
   Smartphone,
   Terminal,
+  Trophy,
   X,
   Zap,
 } from "lucide-react";
@@ -51,7 +52,12 @@ import {
   siTypescript,
   siVuedotjs,
 } from "simple-icons";
-import { featuredProjects, pricingTiers, skillGroups } from "@/data/portfolio";
+import {
+  experienceTimeline,
+  featuredProjects,
+  pricingTiers,
+  skillGroups,
+} from "@/data/portfolio";
 
 const subjects = [
   { label: "Full stack systems", icon: Blocks },
@@ -226,6 +232,17 @@ const valueProps = [
 ];
 
 const filters = ["All", "Web apps", "Business systems", "Brand sites"];
+const contactSignals = [
+  "Replies within 24 hours",
+  "Best for web apps, dashboards, mobile MVPs, and business systems",
+  "Scope, design, build, launch support",
+];
+
+const experienceKernel = [
+  { label: "Honors", value: "Build / Train / Lead" },
+  { label: "Rooms", value: "Business, school, accessibility" },
+  { label: "Craft", value: "Frontend, backend, AI, PM" },
+];
 
 function projectBucket(category: string) {
   const lower = category.toLowerCase();
@@ -280,6 +297,7 @@ export default function Home() {
         <nav aria-label="Main navigation">
           <a href="#work">Work</a>
           <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
           <a href="#process">Process</a>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
@@ -292,7 +310,7 @@ export default function Home() {
             Pricing
           </a>
           <a className="signup-link" href="#contact">
-            Hire Me
+            Start a build
           </a>
           <button
             className="menu-button"
@@ -311,6 +329,9 @@ export default function Home() {
             </a>
             <a href="#skills" onClick={() => setMobileOpen(false)}>
               Skills
+            </a>
+            <a href="#experience" onClick={() => setMobileOpen(false)}>
+              Experience
             </a>
             <a href="#process" onClick={() => setMobileOpen(false)}>
               Process
@@ -407,7 +428,7 @@ export default function Home() {
             </a>
           </div>
           <div>
-            <p>Scoped. Built. Launched.</p>
+            <p>Open for focused web and mobile builds.</p>
           </div>
         </div>
 
@@ -605,7 +626,7 @@ export default function Home() {
                   </a>
                 ))}
                 <a className="project-cta-card" href="#contact">
-                  <span>Premium build slot</span>
+                  <span>Project planning</span>
                   <h4>Start yours next.</h4>
                   <p>
                     Bring the idea. I will shape the build.
@@ -625,10 +646,67 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="process" className="experience-section section-pad">
-        <div className="section-shell">
+      <section id="experience" className="experience-section section-pad">
+        <div className="section-shell experience-ledger">
+          <div className="experience-copy">
+            <span className="mission-command">hall.of.fame</span>
+            <h2 className="code-heading">A wall of rooms where trust was earned.</h2>
+            <p>
+              The work spans software development, AI integration, ICT
+              training, backend decisions, digital communication, and client
+              delivery so projects can move from unclear ideas to working
+              systems.
+            </p>
+            <div className="kernel-grid" aria-label="Experience range summary">
+              {experienceKernel.map((item) => (
+                <span key={item.label}>
+                  <strong>{item.label}</strong>
+                  <em>{item.value}</em>
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="experience-timeline" aria-label="Experience hall of fame">
+            <div className="mission-console-bar">
+              <span>HALL OPEN</span>
+              <strong>{experienceTimeline.length} HONORS</strong>
+            </div>
+            {experienceTimeline.map((item, index) => (
+              <article
+                key={`${item.context}-${item.role}`}
+                className={`experience-item${item.featured ? " is-featured" : ""}`}
+              >
+                <div className="plaque-hanger" aria-hidden="true">
+                  <span />
+                  <span />
+                </div>
+                <div className="experience-marker">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <Trophy size={20} strokeWidth={1.9} />
+                </div>
+                <div className="experience-item-copy">
+                  <div className="experience-item-head">
+                    <span>{item.status}</span>
+                    <small>{item.period}</small>
+                  </div>
+                  <h3>{item.context}</h3>
+                  <strong>{item.role}</strong>
+                  <p>{item.scope}</p>
+                  <div className="experience-evidence">
+                    <span>{item.mode}</span>
+                    {item.evidence.map((point) => (
+                      <span key={point}>{point}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div id="process" className="section-shell process-anchor">
           <div className="process-head">
-            <p className="eyebrow">The experience</p>
             <h2 className="code-heading">From brief to launch</h2>
           </div>
           <div className="value-stack launch-pipeline">
@@ -645,7 +723,6 @@ export default function Home() {
 
       <section id="pricing" className="pricing-section section-pad">
         <div className="section-shell">
-          <p className="eyebrow">Plans</p>
           <h2 className="code-heading">Choose your build path</h2>
           <p className="pricing-bridge">
             Not sure which tier fits? Start with the project goal. I will shape
@@ -680,25 +757,31 @@ export default function Home() {
 
       <section id="contact" className="contact-section section-pad">
         <div className="section-shell contact-panel">
-          <div>
+          <div className="contact-copy">
             <p className="eyebrow">Ready when you are</p>
-            <h2 className="code-heading">Start your next build</h2>
+            <h2 className="code-heading">Let&apos;s scope your build</h2>
             <p>
-              Tell me what you want to launch. I will help shape the path.
+              Send the idea, goal, or problem. I&apos;ll help shape the scope,
+              recommend the right build path, and reply within 24 hours.
             </p>
+            <div className="contact-signal-grid" aria-label="Why start here">
+              {contactSignals.map((signal) => (
+                <span key={signal}>{signal}</span>
+              ))}
+            </div>
             <blockquote>
-              I work best with clients who need clarity, speed, and software
-              that survives launch.
+              Bring it early, rough, or half-defined. I&apos;ll turn it into a
+              clear next step.
             </blockquote>
           </div>
           <div className="contact-actions">
-            <a href="mailto:ntsinzifrancois@gmail.com">
+            <a href="mailto:ntsinzifrancois@gmail.com?subject=Project%20brief%20from%20portfolio">
               <Phone size={20} />
-              Email me
+              Email project brief
             </a>
-            <a href="#projects">
+            <a href="#pricing">
               <GraduationCap size={20} />
-              Review projects
+              Review pricing
             </a>
           </div>
         </div>

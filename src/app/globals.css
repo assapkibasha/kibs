@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --cc-black: #000000;
+  --cc-black: #03050a;
   --cc-ink: #101325;
   --cc-panel: #12162b;
   --cc-panel-2: #080a14;
@@ -18,6 +18,9 @@
   --cc-orbit: rgba(255, 255, 255, 0.28);
   --cc-white-soft: rgba(255, 255, 255, 0.78);
   --cc-grid: rgba(80, 95, 255, 0.2);
+  --cc-radius: 8px;
+  --cc-radius-sm: 4px;
+  --cc-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
@@ -35,9 +38,12 @@ html {
 
 body {
   margin: 0;
-  background: var(--cc-black);
+  background:
+    radial-gradient(circle at 50% -20%, rgba(102, 199, 255, 0.1), transparent 28rem),
+    var(--cc-black);
   color: var(--cc-white);
   font-family: var(--font-manrope), Arial, sans-serif;
+  text-rendering: geometricPrecision;
 }
 
 a {
@@ -67,14 +73,15 @@ input {
   align-items: center;
   justify-content: center;
   min-height: 2.75rem;
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-yellow);
   color: var(--cc-black);
   padding: 0 1.25rem;
   font-weight: 900;
   transition:
     filter 180ms ease,
-    transform 180ms ease;
+    transform 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .signup-link:hover,
@@ -85,6 +92,12 @@ input {
 .section-title-row a:hover,
 .price-card a:hover {
   filter: brightness(1.06);
+}
+
+.signup-link:hover,
+.more-button:hover,
+.contact-actions a:first-child:hover {
+  box-shadow: inset 0 -3px 0 rgba(3, 5, 10, 0.28);
 }
 
 .signup-link:active,
@@ -103,9 +116,11 @@ input {
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 1.5rem;
-  min-height: 5.4rem;
+  min-height: 4.9rem;
   border-bottom: 1px solid var(--cc-soft-border);
-  background: rgba(16, 19, 37, 0.96);
+  background:
+    linear-gradient(90deg, rgba(255, 211, 0, 0.06), transparent 36%),
+    rgba(16, 19, 37, 0.94);
   padding: 0 clamp(1rem, 7vw, 6rem);
   backdrop-filter: blur(16px);
 }
@@ -119,9 +134,33 @@ input {
 
 .portfolio-nav nav a,
 .login-link {
+  position: relative;
   font-size: 0.95rem;
   font-weight: 800;
   color: var(--cc-white);
+  transition: color 160ms ease;
+}
+
+.portfolio-nav nav a::after,
+.login-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -0.4rem;
+  height: 2px;
+  background: var(--cc-yellow);
+  transition: right 180ms var(--cc-ease);
+}
+
+.portfolio-nav nav a:hover,
+.login-link:hover {
+  color: var(--cc-yellow);
+}
+
+.portfolio-nav nav a:hover::after,
+.login-link:hover::after {
+  right: 0;
 }
 
 .code-logo {
@@ -183,7 +222,7 @@ input {
 }
 
 .mobile-menu a {
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   padding: 0.85rem 1rem;
   font-weight: 900;
 }
@@ -222,26 +261,26 @@ input {
 .hero-section {
   display: grid;
   gap: 0;
-  padding: clamp(1.3rem, 3vw, 2rem) clamp(1rem, 7vw, 6rem) 4.5rem;
+  padding: clamp(1.1rem, 2.6vw, 1.6rem) clamp(1rem, 7vw, 6rem) 4.5rem;
   background: var(--cc-black);
 }
 
 .hero-frame {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.78fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 0.92fr);
   gap: clamp(1.4rem, 4vw, 4rem);
   align-items: center;
-  min-height: clamp(26rem, 47vw, 40rem);
+  min-height: clamp(27rem, 45vw, 38rem);
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   border: 1px solid var(--cc-soft-border);
   background:
-    radial-gradient(circle at 14% 18%, rgba(255, 211, 0, 0.18), transparent 22%),
-    radial-gradient(circle at 80% 48%, rgba(102, 199, 255, 0.16), transparent 25%),
-    linear-gradient(135deg, #050505 0%, #0d1220 58%, #050505 100%);
-  background-color: #050505;
-  padding: clamp(1.4rem, 5vw, 4rem);
+    radial-gradient(circle at 12% 18%, rgba(255, 211, 0, 0.2), transparent 23%),
+    radial-gradient(circle at 85% 42%, rgba(102, 199, 255, 0.18), transparent 28%),
+    linear-gradient(135deg, #03050a 0%, #0c1324 58%, #03050a 100%);
+  background-color: var(--cc-black);
+  padding: clamp(1.25rem, 4.5vw, 3.4rem);
 }
 
 .hero-frame::after {
@@ -306,9 +345,12 @@ input {
   z-index: 2;
   width: max-content;
   max-width: min(100%, 38rem);
-  border-radius: 4px;
-  background: var(--cc-black);
-  padding: 0.3rem 1rem 0.45rem;
+  border: 1px solid rgba(255, 211, 0, 0.18);
+  border-radius: var(--cc-radius-sm);
+  background:
+    linear-gradient(90deg, rgba(255, 211, 0, 0.1), transparent 36%),
+    rgba(3, 5, 10, 0.9);
+  padding: 0.25rem 0.95rem 0.48rem;
   font-family: var(--font-mono), monospace;
   font-size: clamp(2rem, 5.4vw, 4.2rem);
   line-height: 1.04;
@@ -338,12 +380,13 @@ input {
 }
 
 .hero-console p {
-  max-width: 42rem;
-  margin: 1.2rem 0 0;
+  max-width: 35rem;
+  margin: 0.7rem 0 0;
   color: var(--cc-muted);
   font-size: clamp(1.05rem, 2vw, 1.35rem);
   font-weight: 850;
-  line-height: 1.6;
+  line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .hero-console > * {
@@ -385,7 +428,9 @@ input {
   background:
     radial-gradient(circle, rgba(255, 211, 0, 0.2), rgba(0, 0, 0, 0.92) 64%),
     var(--cc-black);
-  box-shadow: 0 0 60px rgba(255, 211, 0, 0.22);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 211, 0, 0.16),
+    0 0 48px rgba(255, 211, 0, 0.2);
   text-align: center;
 }
 
@@ -414,7 +459,9 @@ input {
   justify-content: center;
   border: 1px solid var(--cc-border);
   border-radius: 999px;
-  background: var(--cc-black);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent),
+    var(--cc-black);
   padding: 0.55rem 0.8rem;
   color: var(--cc-white);
   font-family: var(--font-mono), monospace;
@@ -428,15 +475,16 @@ input {
 .hero-card {
   z-index: 3;
   display: grid;
-  grid-template-columns: minmax(10rem, 15rem) minmax(16rem, 1fr) auto;
+  grid-template-columns: minmax(11rem, 16rem) minmax(15rem, 1fr) minmax(12rem, auto);
   align-items: center;
   gap: clamp(1rem, 3vw, 2rem);
-  width: min(74rem, calc(100% - 7rem));
-  margin: -3rem auto 0;
-  border: 1px solid rgba(166, 255, 61, 0.72);
-  border-radius: 8px;
+  width: min(78rem, calc(100% - 5rem));
+  margin: -2.6rem auto 0;
+  border: 1px solid rgba(166, 255, 61, 0.58);
+  border-radius: var(--cc-radius);
   background:
-    linear-gradient(90deg, rgba(166, 255, 61, 0.12), transparent 34%),
+    linear-gradient(90deg, rgba(166, 255, 61, 0.14), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent),
     var(--cc-black);
   padding: 0.85rem;
 }
@@ -447,7 +495,7 @@ input {
   min-height: 8rem;
   overflow: hidden;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-panel);
   isolation: isolate;
   transition:
@@ -562,9 +610,9 @@ input {
 
 .trusted-strip {
   display: grid;
-  gap: 1rem;
+  gap: 0.9rem;
   justify-items: center;
-  padding: clamp(3rem, 7vw, 4.75rem) 0 0.4rem;
+  padding: clamp(2.35rem, 5vw, 3.4rem) 0 0.4rem;
   color: var(--cc-muted);
 }
 
@@ -581,7 +629,7 @@ input {
   gap: 0.8rem;
   padding: 0.9rem 1rem;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 12px;
+  border-radius: var(--cc-radius);
   background:
     linear-gradient(180deg, rgba(102, 199, 255, 0.08), transparent 65%),
     rgba(8, 10, 20, 0.74);
@@ -591,12 +639,12 @@ input {
 .skills-proof-board {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1.3fr);
+  grid-template-columns: minmax(14rem, 0.68fr) minmax(0, 1.32fr);
   gap: 1.2rem;
   align-items: stretch;
   overflow: hidden;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 211, 0, 0.12), transparent 28%),
     radial-gradient(circle at 82% 72%, rgba(102, 199, 255, 0.11), transparent 34%),
@@ -609,7 +657,7 @@ input {
   align-content: center;
   gap: 1rem;
   border: 1px solid var(--cc-border);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background: var(--cc-black);
   padding: clamp(1rem, 3vw, 1.5rem);
   box-shadow: inset 0 0 42px rgba(255, 211, 0, 0.08);
@@ -640,7 +688,7 @@ input {
 
 .skills-capability-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   gap: 1.1rem;
 }
 
@@ -648,11 +696,21 @@ input {
   display: grid;
   align-content: space-between;
   gap: 1.15rem;
-  min-height: 17rem;
+  min-height: 10.5rem;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 8px;
-  background: var(--cc-panel);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(135deg, rgba(102, 199, 255, 0.08), transparent 62%),
+    var(--cc-panel);
   padding: 1.1rem;
+}
+
+.skills-capability-card:first-child {
+  grid-row: span 2;
+  background:
+    linear-gradient(180deg, rgba(255, 211, 0, 0.12), transparent 48%),
+    linear-gradient(135deg, rgba(166, 255, 61, 0.1), transparent 58%),
+    var(--cc-black);
 }
 
 .skills-capability-card div {
@@ -690,7 +748,7 @@ input {
   height: 3.35rem;
   place-items: center;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background:
     linear-gradient(
       180deg,
@@ -732,7 +790,7 @@ input {
 .skill-logo-tile.is-compact {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
 }
 
 .skill-logo-tile.is-compact svg {
@@ -750,7 +808,7 @@ input {
 .trusted-strip .skill-logo-tile.is-compact {
   width: 3rem;
   height: 3rem;
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
 }
 
 .trusted-strip .skill-logo-tile.is-compact svg {
@@ -761,7 +819,7 @@ input {
 .skills-capability-card .skill-logo-tile.is-compact {
   width: 2.85rem;
   height: 2.85rem;
-  border-radius: 7px;
+  border-radius: var(--cc-radius);
 }
 
 .skills-capability-card .skill-logo-tile.is-compact svg {
@@ -772,7 +830,7 @@ input {
 .skills-tool-cloud .skill-logo-tile {
   width: 3.55rem;
   height: 3.55rem;
-  border-radius: 10px;
+  border-radius: var(--cc-radius);
 }
 
 .skills-tool-cloud .skill-logo-tile svg {
@@ -801,8 +859,11 @@ input {
 
 .dark-band .section-shell,
 .search-section .section-shell {
-  border-radius: 0;
-  background: rgba(16, 19, 37, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(180deg, rgba(102, 199, 255, 0.06), transparent 26rem),
+    rgba(16, 19, 37, 0.88);
   padding: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -814,7 +875,7 @@ input {
   align-items: center;
   gap: 1.5rem;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background:
     linear-gradient(90deg, rgba(102, 199, 255, 0.12), transparent 55%),
     var(--cc-panel);
@@ -904,7 +965,7 @@ input {
   align-items: center;
   gap: 1.1rem;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-black);
   padding: 0.95rem 1rem;
   font-family: var(--font-mono), monospace;
@@ -941,8 +1002,10 @@ input {
   display: grid;
   gap: 0.5rem;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 8px;
-  background: #080808;
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(90deg, rgba(255, 211, 0, 0.07), transparent 45%),
+    var(--cc-panel-2);
   padding: 1.45rem 4.5rem 1.45rem 1.8rem;
 }
 
@@ -983,7 +1046,7 @@ input {
 
 .filter-row button {
   border: 1px solid var(--cc-soft-border);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-panel);
   color: var(--cc-white);
   padding: 0.75rem 1rem;
@@ -1038,7 +1101,7 @@ input {
   gap: clamp(1rem, 3vw, 2rem);
   overflow: hidden;
   border: 1px solid var(--cc-border);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background:
     linear-gradient(135deg, rgba(255, 211, 0, 0.11), transparent 38%),
     var(--cc-black);
@@ -1086,7 +1149,7 @@ input {
 .project-meta-row span,
 .project-stack-row span {
   border: 1px solid var(--cc-soft-border);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-panel);
   padding: 0.5rem 0.65rem;
   color: var(--cc-muted);
@@ -1106,7 +1169,7 @@ input {
 
 .project-proof-list li {
   border: 1px solid rgba(166, 255, 61, 0.42);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: rgba(166, 255, 61, 0.08);
   padding: 0.48rem 0.65rem;
   color: var(--cc-white);
@@ -1136,7 +1199,7 @@ input {
 .project-case-shot {
   overflow: hidden;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-panel-2);
 }
 
@@ -1164,8 +1227,10 @@ input {
   display: grid;
   overflow: hidden;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 8px;
-  background: var(--cc-panel);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 44%),
+    var(--cc-panel);
   transition:
     border-color 220ms ease,
     transform 220ms ease;
@@ -1174,6 +1239,18 @@ input {
 .project-case-card:hover {
   border-color: rgba(255, 211, 0, 0.58);
   transform: translateY(-3px);
+}
+
+.project-case-card:nth-child(2n) {
+  background:
+    linear-gradient(135deg, rgba(102, 199, 255, 0.08), transparent 54%),
+    var(--cc-panel);
+}
+
+.project-case-card:nth-child(3n) {
+  background:
+    linear-gradient(135deg, rgba(166, 255, 61, 0.08), transparent 54%),
+    var(--cc-panel);
 }
 
 .project-case-shot {
@@ -1204,7 +1281,7 @@ input {
   min-height: 24rem;
   overflow: hidden;
   border: 1px solid rgba(255, 211, 0, 0.48);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background:
     radial-gradient(circle at 80% 20%, rgba(166, 255, 61, 0.18), transparent 24%),
     linear-gradient(135deg, rgba(255, 211, 0, 0.2), transparent 44%),
@@ -1256,7 +1333,7 @@ input {
   min-height: 31rem;
   flex-direction: column;
   border: 1px solid var(--cc-border);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background: var(--cc-panel);
   padding: 1rem;
 }
@@ -1266,7 +1343,7 @@ input {
   aspect-ratio: 16 / 10;
   margin-bottom: 1rem;
   border: 1px solid var(--cc-soft-border);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-black);
 }
 
@@ -1278,7 +1355,7 @@ input {
 
 .course-pill {
   align-self: flex-start;
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   padding: 0.35rem 0.75rem;
   color: var(--cc-black);
   font-family: var(--font-mono), monospace;
@@ -1326,7 +1403,7 @@ input {
 
 .empty-state {
   border: 1px solid var(--cc-border);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   background: var(--cc-panel);
   padding: 1.5rem;
   color: var(--cc-muted);
@@ -1339,6 +1416,309 @@ input {
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.2rem;
+}
+
+.experience-ledger {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.62fr) minmax(0, 1.38fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: start;
+  width: min(78rem, 100%);
+  margin-bottom: clamp(3rem, 7vw, 5.5rem);
+}
+
+.experience-section,
+.process-anchor {
+  scroll-margin-top: 6rem;
+}
+
+.experience-copy {
+  position: sticky;
+  top: 7rem;
+  display: grid;
+  gap: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 211, 0, 0.5);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(90deg, rgba(255, 211, 0, 0.16), transparent 3px),
+    radial-gradient(circle at 0 0, rgba(255, 211, 0, 0.18), transparent 24%),
+    linear-gradient(135deg, rgba(102, 199, 255, 0.1), transparent 58%),
+    var(--cc-black);
+  padding: clamp(1.1rem, 3vw, 1.5rem);
+}
+
+.experience-copy::after {
+  content: "";
+  position: absolute;
+  inset: auto 1rem 1rem auto;
+  width: 5.4rem;
+  height: 7rem;
+  border: 1px solid rgba(255, 211, 0, 0.24);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(180deg, rgba(255, 211, 0, 0.1), transparent 46%),
+    rgba(255, 255, 255, 0.02);
+  opacity: 0.58;
+}
+
+.mission-command {
+  width: max-content;
+  max-width: 100%;
+  border: 1px solid rgba(166, 255, 61, 0.36);
+  border-radius: var(--cc-radius-sm);
+  background: rgba(166, 255, 61, 0.08);
+  padding: 0.45rem 0.62rem;
+  color: var(--cc-green);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.experience-copy .code-heading {
+  margin: 0;
+  font-size: clamp(1.8rem, 4.2vw, 3rem);
+}
+
+.experience-copy p:not(.eyebrow) {
+  margin: 0;
+  color: var(--cc-muted);
+  font-weight: 800;
+  line-height: 1.65;
+}
+
+.kernel-grid {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.kernel-grid span {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid var(--cc-soft-border);
+  border-radius: var(--cc-radius);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.8rem;
+  color: var(--cc-muted);
+  font-size: 0.88rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.kernel-grid strong {
+  color: var(--cc-yellow);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+}
+
+.kernel-grid em {
+  color: var(--cc-white);
+  font-style: normal;
+}
+
+.experience-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: clamp(0.9rem, 2vw, 1.15rem);
+  border: 1px solid var(--cc-soft-border);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(180deg, rgba(255, 211, 0, 0.08), transparent 5px),
+    radial-gradient(circle at 50% 0, rgba(255, 211, 0, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(8, 10, 20, 0.96), rgba(0, 0, 0, 0.9)),
+    var(--cc-panel-2);
+  padding: clamp(0.85rem, 2.4vw, 1.2rem);
+}
+
+.mission-console-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 1px solid var(--cc-soft-border);
+  border-radius: var(--cc-radius);
+  background: var(--cc-black);
+  padding: 0.85rem 1rem;
+  font-family: var(--font-mono), monospace;
+}
+
+.mission-console-bar span {
+  color: var(--cc-green);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.mission-console-bar strong {
+  color: var(--cc-yellow);
+  font-size: 0.82rem;
+}
+
+.experience-item {
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  min-height: 100%;
+  padding-top: 1.35rem;
+  isolation: isolate;
+}
+
+.plaque-hanger {
+  position: absolute;
+  left: 1.15rem;
+  right: 1.15rem;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.plaque-hanger span {
+  width: 0.65rem;
+  height: 1.85rem;
+  border-inline: 1px solid rgba(255, 211, 0, 0.54);
+  background: linear-gradient(180deg, var(--cc-yellow), rgba(255, 211, 0, 0.1));
+}
+
+.experience-marker {
+  position: absolute;
+  left: 1rem;
+  top: 2.1rem;
+  z-index: 1;
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  place-items: center;
+  border: 1px solid var(--cc-yellow);
+  border-radius: var(--cc-radius-sm);
+  background:
+    linear-gradient(180deg, rgba(255, 211, 0, 0.16), transparent),
+    var(--cc-black);
+  color: var(--cc-yellow);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+  box-shadow: 0 0 0 4px var(--cc-panel);
+}
+
+.experience-marker svg {
+  color: var(--cc-blue);
+}
+
+.experience-marker span {
+  color: var(--cc-yellow);
+}
+
+.experience-item-copy {
+  display: grid;
+  gap: 0.85rem;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--cc-soft-border);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(180deg, rgba(255, 211, 0, 0.08), transparent 4px),
+    linear-gradient(135deg, rgba(102, 199, 255, 0.08), transparent 62%),
+    var(--cc-panel);
+  padding: 1.15rem 1rem 1rem;
+  padding-top: 4.25rem;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.experience-item.is-featured .experience-item-copy {
+  border-color: rgba(255, 211, 0, 0.55);
+  background:
+    linear-gradient(180deg, rgba(255, 211, 0, 0.16), transparent 4px),
+    radial-gradient(circle at 88% 12%, rgba(166, 255, 61, 0.14), transparent 26%),
+    linear-gradient(135deg, rgba(255, 211, 0, 0.1), transparent 58%),
+    var(--cc-panel);
+}
+
+.experience-item:hover .experience-item-copy {
+  border-color: rgba(255, 211, 0, 0.42);
+  transform: translateY(-2px);
+}
+
+.experience-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  justify-content: space-between;
+  order: -1;
+}
+
+.experience-item-head span,
+.experience-evidence span {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.experience-item-head span {
+  border: 1px solid rgba(166, 255, 61, 0.34);
+  border-radius: var(--cc-radius-sm);
+  background: rgba(166, 255, 61, 0.08);
+  padding: 0.4rem 0.55rem;
+  color: var(--cc-green);
+}
+
+.experience-item-head small {
+  color: var(--cc-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.9rem;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.experience-item h3 {
+  margin: 0;
+  color: var(--cc-white);
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(1.22rem, 2.2vw, 1.65rem);
+  line-height: 1.16;
+  text-wrap: balance;
+}
+
+.experience-item-copy > strong {
+  color: var(--cc-yellow);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.experience-item p {
+  margin: 0;
+  color: var(--cc-muted);
+  line-height: 1.62;
+}
+
+.experience-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.experience-evidence span {
+  border: 1px solid rgba(166, 255, 61, 0.36);
+  border-radius: var(--cc-radius-sm);
+  background: rgba(166, 255, 61, 0.07);
+  padding: 0.44rem 0.58rem;
+  color: var(--cc-white);
+}
+
+.experience-evidence span:first-child {
+  border-color: rgba(102, 199, 255, 0.38);
+  background: rgba(102, 199, 255, 0.08);
+  color: var(--cc-blue);
 }
 
 .process-head .code-heading {
@@ -1358,16 +1738,16 @@ input {
 .value-stack article,
 .price-card {
   border: 1px solid var(--cc-soft-border);
-  border-radius: 8px;
+  border-radius: var(--cc-radius);
   background: var(--cc-panel);
   padding: 1.4rem;
 }
 
 .launch-pipeline article {
   position: relative;
-  min-height: 12rem;
+  min-height: 11rem;
   background:
-    linear-gradient(180deg, rgba(255, 211, 0, 0.08), transparent 44%),
+    linear-gradient(180deg, rgba(255, 211, 0, 0.1), transparent 44%),
     var(--cc-black);
 }
 
@@ -1421,6 +1801,14 @@ input {
   gap: 1rem;
   align-content: start;
   min-height: 22rem;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.price-card:hover {
+  border-color: rgba(255, 211, 0, 0.44);
+  transform: translateY(-2px);
 }
 
 .price-card-head {
@@ -1501,15 +1889,51 @@ input {
   padding: clamp(1.4rem, 4vw, 3rem);
 }
 
+.contact-copy {
+  display: grid;
+  gap: 1rem;
+  max-width: 42rem;
+}
+
 .contact-panel .code-heading {
-  margin: 0.5rem 0 1rem;
+  margin: 0.35rem 0 0.4rem;
+}
+
+.contact-copy > p:not(.eyebrow) {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--cc-muted);
+  line-height: 1.65;
+}
+
+.contact-signal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.2rem;
+}
+
+.contact-signal-grid span {
+  min-height: 3.1rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--cc-soft-border);
+  border-radius: var(--cc-radius);
+  background:
+    linear-gradient(90deg, rgba(102, 199, 255, 0.08), transparent 72%),
+    rgba(255, 255, 255, 0.02);
+  padding: 0.8rem 0.9rem;
+  color: var(--cc-white);
+  font-size: 0.92rem;
+  font-weight: 850;
+  line-height: 1.45;
 }
 
 .contact-panel blockquote {
-  max-width: 42rem;
-  margin: 1.2rem 0 0;
+  max-width: 38rem;
+  margin: 0.1rem 0 0;
   border: 1px solid rgba(255, 211, 0, 0.48);
-  border-radius: 4px;
+  border-radius: var(--cc-radius-sm);
   padding: 0.9rem 1rem;
   background: rgba(255, 211, 0, 0.08);
   color: var(--cc-white);
@@ -1520,6 +1944,8 @@ input {
 .contact-actions {
   display: grid;
   gap: 0.8rem;
+  align-content: center;
+  min-width: 13rem;
 }
 
 .contact-actions a:last-child {
@@ -1548,6 +1974,77 @@ input {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .hero-frame,
+  .skills-proof-board {
+    grid-template-columns: 1fr;
+  }
+
+  .rotating-command span {
+    animation: none;
+    opacity: 0;
+    transform: none;
+  }
+
+  .rotating-command span:first-child {
+    opacity: 1;
+  }
+
+  .hero-frame {
+    min-height: auto;
+  }
+
+  .hero-system {
+    min-height: 18rem;
+  }
+
+  .system-node {
+    transform: rotate(var(--node-angle)) translateX(clamp(5.4rem, 18vw, 8rem))
+      rotate(calc(-1 * var(--node-angle)));
+  }
+
+  .hero-card {
+    grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr);
+    width: min(44rem, 100%);
+    margin: 1rem auto 0;
+  }
+
+  .hero-card > div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .skills-capability-card:first-child {
+    grid-row: auto;
+  }
+
+  .experience-ledger {
+    grid-template-columns: 1fr;
+    width: min(52rem, 100%);
+  }
+
+  .experience-copy {
+    position: relative;
+    top: auto;
+    grid-template-columns: minmax(0, 1.05fr) minmax(14rem, 0.95fr);
+    gap: 1rem 1.25rem;
+    align-items: start;
+  }
+
+  .experience-copy .mission-command,
+  .experience-copy .eyebrow,
+  .experience-copy .code-heading,
+  .experience-copy > p:not(.eyebrow) {
+    grid-column: 1;
+  }
+
+  .experience-copy .kernel-grid {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    margin-top: 0;
+  }
+
+  .experience-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
@@ -1612,7 +2109,7 @@ input {
     min-width: 3.3rem;
     padding: 0.32rem 0.42rem;
     font-size: 0.62rem;
-    transform: rotate(var(--node-angle)) translateX(3.55rem)
+    transform: rotate(var(--node-angle)) translateX(4.35rem)
       rotate(calc(-1 * var(--node-angle)));
   }
 
@@ -1621,6 +2118,10 @@ input {
     grid-template-columns: 1fr;
     margin-top: 0.75rem;
     padding: 0.9rem;
+  }
+
+  .hero-card > div:last-child {
+    display: none;
   }
 
   .hero-proof-card {
@@ -1672,7 +2173,8 @@ input {
   }
 
   .trusted-strip {
-    display: none;
+    display: grid;
+    justify-items: stretch;
   }
 
   .section-pad {
@@ -1698,9 +2200,50 @@ input {
   .team-callout,
   .builder-card,
   .contact-panel,
+  .experience-ledger,
   .skills-proof-board,
   .launch-pipeline {
     grid-template-columns: 1fr;
+  }
+
+  .experience-timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-copy .mission-command,
+  .experience-copy .eyebrow,
+  .experience-copy .code-heading,
+  .experience-copy > p:not(.eyebrow),
+  .experience-copy .kernel-grid {
+    grid-column: 1;
+  }
+
+  .experience-copy .kernel-grid {
+    grid-row: auto;
+  }
+
+  .experience-item {
+    padding-top: 1.2rem;
+  }
+
+  .experience-marker {
+    left: 0.95rem;
+    top: 1.9rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .experience-item-copy {
+    padding: 3.85rem 1rem 1rem;
+  }
+
+  .plaque-hanger {
+    left: 0.95rem;
+    right: 0.95rem;
   }
 
   .process-head {
@@ -1711,9 +2254,17 @@ input {
     grid-template-columns: 1fr;
   }
 
+  .skills-capability-card:first-child {
+    grid-row: auto;
+  }
+
   .skills-proof-board {
     gap: 0.85rem;
     padding: 0.85rem;
+  }
+
+  .contact-signal-grid {
+    grid-template-columns: 1fr;
   }
 
   .trusted-strip {
@@ -1722,13 +2273,20 @@ input {
   }
 
   .trusted-strip div {
-    width: min(100%, 23rem);
-    grid-template-columns: repeat(auto-fit, minmax(2.85rem, 1fr));
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
     gap: 0.65rem;
     padding: 0.8rem;
   }
 
+  .trusted-strip div::-webkit-scrollbar {
+    display: none;
+  }
+
   .trusted-strip .skill-logo-tile.is-compact {
+    flex: 0 0 2.85rem;
     width: 2.85rem;
     height: 2.85rem;
   }
@@ -1845,18 +2403,64 @@ input {
   }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .hero-frame,
+  .hero-card,
+  .team-callout,
+  .skills-proof-board,
+  .project-search,
+  .project-featured,
+  .experience-ledger,
+  .pricing-grid,
+  .contact-panel {
+    animation: surfaceIn 620ms var(--cc-ease) both;
+  }
+
+  .hero-card {
+    animation-delay: 120ms;
+  }
+
+  .skills-proof-board,
+  .project-featured,
+  .experience-ledger,
+  .contact-panel {
+    animation-delay: 80ms;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-system::before,
   .hero-system::after,
   .system-node,
   .flying-skill,
-  .rotating-command span {
+  .rotating-command span,
+  .hero-frame,
+  .hero-card,
+  .team-callout,
+  .skills-proof-board,
+  .project-search,
+  .project-featured,
+  .experience-ledger,
+  .pricing-grid,
+  .contact-panel {
     animation: none;
   }
 
   .rotating-command span:first-child {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes surfaceIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -1925,18 +2529,18 @@ input {
 
 @keyframes commandSwitch {
   0%,
-  17% {
+  22% {
     opacity: 1;
     transform: translateY(0);
   }
 
-  24%,
-  93% {
+  25%,
+  95% {
     opacity: 0;
     transform: translateY(-0.55em);
   }
 
-  94%,
+  96%,
   100% {
     opacity: 0;
     transform: translateY(0.55em);

@@ -79,6 +79,93 @@ export const featuredProjects: FeaturedProject[] = [
   },
 ];
 
+export const experienceTimeline = [
+  {
+    role: "Software Developer",
+    context: "HIGURA VENTURES",
+    period: "2025 - Present",
+    status: "DEPLOYED",
+    mode: "Business systems",
+    scope:
+      "Contributing to scalable business and community systems, improving user experience and performance, and supporting backend architecture decisions.",
+    evidence: [
+      "Backend development",
+      "System architecture",
+      "AI-driven features",
+    ],
+  },
+  {
+    role: "Web Designer, Social Media Manager and ICT Trainer",
+    context: "Bright Future Cornerstone",
+    period: "2026 - Present",
+    status: "TRAINED",
+    mode: "Digital operations",
+    scope:
+      "Managing website visibility, social communication, content campaigns, and practical training across AI, software development, and ICT.",
+    evidence: [
+      "Website management",
+      "Digital campaigns",
+      "AI and ICT training",
+    ],
+  },
+  {
+    role: "Trainer",
+    context: "INTANGO TSS",
+    period: "2025 - Present",
+    status: "TRAINING",
+    mode: "TVET delivery",
+    scope:
+      "Delivering part-time software development training, supporting practical TVET skills, and adapting learning materials to course goals.",
+    evidence: ["Software training", "TVET curriculum", "Student support"],
+  },
+  {
+    role: "Software Development Trainer",
+    context: "Codebridge Academy",
+    period: "Training role",
+    status: "TRAINED",
+    mode: "Software academy",
+    scope:
+      "Training learners in software development through a company focused on helping people build practical coding and technology skills.",
+    evidence: ["Software training", "Practical coding", "Learner support"],
+  },
+  {
+    role: "Co-founder and Software Developer",
+    context: "NoBarriers",
+    period: "Product build",
+    status: "CO-FOUNDED",
+    mode: "Accessibility product",
+    featured: true,
+    scope:
+      "Co-founded and built a sign language learning platform, working across both frontend and backend to support accessible education.",
+    evidence: [
+      "Frontend development",
+      "Backend development",
+      "Accessible learning",
+    ],
+  },
+  {
+    role: "Backend Developer and Project Manager",
+    context: "Intambwe School Management System",
+    period: "School operations platform",
+    status: "ARCHITECTED",
+    mode: "School operations",
+    featured: true,
+    scope:
+      "Worked on a school management system for full school operations, including marks, student data, administration workflows, backend logic, and project delivery.",
+    evidence: ["Project management", "Backend systems", "Marks + admin workflows"],
+  },
+  {
+    role: "Software Developer",
+    context: "Revant Group",
+    period: "2024 - 2026",
+    status: "SHIPPED",
+    mode: "Youth platform",
+    scope:
+      "Developed the Youth Generation Club platform and management system while collaborating with stakeholders on youth engagement and operations tools.",
+    evidence: ["Management system", "Stakeholder delivery", "Community operations"],
+  },
+];
+
 export const heroMetrics = [
   "Full Stack Developer",
   "Flutter Developer",
