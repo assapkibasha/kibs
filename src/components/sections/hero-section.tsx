@@ -68,8 +68,8 @@ export function HeroSection() {
             <Reveal delay={0.18} immediate>
               <div className="media-card relative min-h-[520px] overflow-hidden rounded-[1.8rem] border border-[color:var(--color-border)]">
                 <Image
-                  src="/media/francois-3d.png"
-                  alt="Ntsinzi Francois 3D portrait"
+                  src="/media/kibs2-cutout.png"
+                  alt="Studio portrait of Ntsinzi Francois"
                   fill
                   priority
                   className="object-cover object-center opacity-95"

@@ -137,7 +137,7 @@ export const AmbientProfile = () => {
           }}
         >
           <Img
-            src={staticFile("profile-ntsinzi.png")}
+            src={staticFile("media/kibs2-cutout.png")}
             style={{
               width: "100%",
               height: "100%",

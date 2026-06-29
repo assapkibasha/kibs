@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
@@ -58,6 +58,7 @@ import {
   pricingTiers,
   skillGroups,
 } from "@/data/portfolio";
+import { MorphingNavMenu } from "@/components/ui/morphing-nav-menu";
 
 const subjects = [
   { label: "Full stack systems", icon: Blocks },
@@ -196,7 +197,16 @@ const trustedTools = [
   "DevOps",
 ];
 
-const heroCommands = ["/Ntsinzi", "/start-now", "/ship-products", "/launch-fast"];
+const navItems = [
+  { label: "Work", href: "#work" },
+  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Process", href: "#process" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Contact", href: "#contact" },
+];
+
+const heroSignals = ["Full-stack builds", "Flutter apps", "Launch systems"];
 
 const skillCapabilities = [
   {
@@ -263,8 +273,49 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeNavHref, setActiveNavHref] = useState("");
+  const [certificateIndex, setCertificateIndex] = useState(0);
   const heroProof = featuredProjects[1] ?? featuredProjects[0];
   const heroProofPoint = heroProof.proofPoints[0];
+
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => ({
+        href: item.href,
+        element: document.getElementById(item.href.slice(1)),
+      }))
+      .filter(
+        (section): section is { href: string; element: HTMLElement } =>
+          section.element !== null,
+      )
+      .sort((a, b) => a.element.offsetTop - b.element.offsetTop);
+
+    if (sections.length === 0) {
+      return;
+    }
+
+    const updateActiveSection = () => {
+      const readingLine = window.innerHeight * 0.38;
+      let currentSection = "";
+
+      for (const { element, href } of sections) {
+        if (element.getBoundingClientRect().top <= readingLine) {
+          currentSection = href;
+        }
+      }
+
+      setActiveNavHref(currentSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
 
   const filteredProjects = useMemo(() => {
     return featuredProjects.filter((project) => {
@@ -294,14 +345,7 @@ export default function Home() {
           <span>N</span>
           <i />
         </a>
-        <nav aria-label="Main navigation">
-          <a href="#work">Work</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#process">Process</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <MorphingNavMenu activeHref={activeNavHref} items={navItems} />
         <div className="nav-actions">
           <a className="icon-link" href="#projects" aria-label="Search projects">
             <Search size={25} strokeWidth={1.8} />
@@ -324,24 +368,17 @@ export default function Home() {
         </div>
         {mobileOpen ? (
           <div className="mobile-menu">
-            <a href="#work" onClick={() => setMobileOpen(false)}>
-              Work
-            </a>
-            <a href="#skills" onClick={() => setMobileOpen(false)}>
-              Skills
-            </a>
-            <a href="#experience" onClick={() => setMobileOpen(false)}>
-              Experience
-            </a>
-            <a href="#process" onClick={() => setMobileOpen(false)}>
-              Process
-            </a>
-            <a href="#pricing" onClick={() => setMobileOpen(false)}>
-              Pricing
-            </a>
-            <a href="#contact" onClick={() => setMobileOpen(false)}>
-              Contact
-            </a>
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                key={item.href}
+                aria-current={activeNavHref === item.href ? "location" : undefined}
+                className={activeNavHref === item.href ? "is-active" : undefined}
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
         ) : null}
       </header>
@@ -356,47 +393,40 @@ export default function Home() {
             </div>
             <span className="hero-status">Available for focused builds</span>
             <h1 className="hero-title">
-              <span className="hero-code hero-code-one">Build with</span>
-              <span
-                className="hero-code hero-code-two rotating-command"
-                aria-label="Ntsinzi start now ship products launch fast"
-              >
-                {heroCommands.map((command, index) => (
-                  <span
-                    key={command}
-                    style={{ "--command-index": index } as CSSProperties}
-                  >
-                    {command}
-                  </span>
-                ))}
-              </span>
+              <span>Products that</span>
+              <span>launch clean</span>
             </h1>
             <p>
-              Web, mobile, dashboards, and business systems built to launch.
+              I help founders, teams, and local businesses turn rough ideas into
+              premium web, mobile, dashboard, and business-system products.
             </p>
-          </div>
-          <div className="hero-system" aria-label="Animated developer system">
-            <div className="system-core">
-              <Terminal size={38} />
-              <strong>NF</strong>
-              <span>product engine</span>
+            <div className="hero-actions">
+              <a className="more-button" href="#contact">
+                Start a build
+              </a>
+              <a className="hero-text-link" href="#work">
+                See proof <ArrowRight size={18} />
+              </a>
             </div>
-            {["Next.js", "Flutter", "PHP", "Python", "SQL", "DevOps"].map(
-              (item, index) => (
-                <span
-                  className="system-node"
-                  key={item}
-                  style={
-                    {
-                      "--node-angle": `${index * 60}deg`,
-                      "--node-delay": `${index * -0.45}s`,
-                    } as CSSProperties
-                  }
-                >
-                  {item}
-                </span>
-              ),
-            )}
+            <div className="hero-signal-row" aria-label="Core build capabilities">
+              {heroSignals.map((signal) => (
+                <span key={signal}>{signal}</span>
+              ))}
+            </div>
+          </div>
+          <div className="hero-system" aria-label="Ntsinzi Francois portrait">
+            <span className="hero-color-plane hero-color-plane-yellow" />
+            <div className="hero-portrait-stage">
+              <Image
+                src="/media/kibs2-cutout.png"
+                alt="Studio portrait of Ntsinzi Francois"
+                fill
+                priority
+                sizes="(max-width: 760px) 88vw, 43vw"
+                className="hero-portrait-image"
+              />
+              <span className="portrait-scan" aria-hidden="true" />
+            </div>
           </div>
         </div>
 
@@ -690,9 +720,97 @@ export default function Home() {
                     <span>{item.status}</span>
                     <small>{item.period}</small>
                   </div>
-                  <h3>{item.context}</h3>
+                  <h3>
+                    {"url" in item && item.url ? (
+                      <a href={item.url} rel="noreferrer" target="_blank">
+                        {item.context}
+                      </a>
+                    ) : (
+                      item.context
+                    )}
+                  </h3>
                   <strong>{item.role}</strong>
                   <p>{item.scope}</p>
+                  {"credentialHighlights" in item &&
+                  item.credentialHighlights?.length ? (
+                    <div
+                      className="credential-highlight-grid"
+                      aria-label="Credential highlights"
+                    >
+                      {item.credentialHighlights.map((credential) => (
+                        <div
+                          className="credential-highlight-card"
+                          key={credential.label}
+                        >
+                          <span>{credential.label}</span>
+                          <strong>{credential.value}</strong>
+                          <small>{credential.detail}</small>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                  {"certificates" in item && item.certificates?.length ? (
+                    <div className="certificate-board">
+                      {(() => {
+                        const activeIndex =
+                          certificateIndex % item.certificates.length;
+                        const certificate = item.certificates[activeIndex];
+
+                        return (
+                          <>
+                            <div className="certificate-board-head">
+                              <span>
+                                {String(activeIndex + 1).padStart(2, "0")} /{" "}
+                                {String(item.certificates.length).padStart(2, "0")}
+                              </span>
+                              <div>
+                                <button
+                                  type="button"
+                                  aria-label="Show previous certificate"
+                                  disabled={item.certificates.length < 2}
+                                  onClick={() =>
+                                    setCertificateIndex((current) =>
+                                      current === 0
+                                        ? item.certificates.length - 1
+                                        : current - 1,
+                                    )
+                                  }
+                                >
+                                  <ArrowRight size={16} />
+                                </button>
+                                <button
+                                  type="button"
+                                  aria-label="Show next certificate"
+                                  disabled={item.certificates.length < 2}
+                                  onClick={() =>
+                                    setCertificateIndex(
+                                      (current) =>
+                                        (current + 1) % item.certificates.length,
+                                    )
+                                  }
+                                >
+                                  <ArrowRight size={16} />
+                                </button>
+                              </div>
+                            </div>
+                            <a
+                              className="certificate-slide"
+                              href={certificate.url ?? undefined}
+                              rel={
+                                certificate.url ? "noreferrer" : undefined
+                              }
+                              target={certificate.url ? "_blank" : undefined}
+                              aria-disabled={certificate.url ? undefined : true}
+                            >
+                              <span>{certificate.issuer}</span>
+                              <strong>{certificate.title}</strong>
+                              <small>{certificate.detail}</small>
+                            </a>
+                          </>
+                        );
+                      })()}
+                    </div>
+                  ) : null}
                   <div className="experience-evidence">
                     <span>{item.mode}</span>
                     {item.evidence.map((point) => (

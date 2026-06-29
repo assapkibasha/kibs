@@ -111,6 +111,7 @@ export const experienceTimeline = [
   {
     role: "Trainer",
     context: "INTANGO TSS",
+    url: "https://www.intangotss.rw/",
     period: "2025 - Present",
     status: "TRAINING",
     mode: "TVET delivery",
@@ -121,12 +122,145 @@ export const experienceTimeline = [
   {
     role: "Software Development Trainer",
     context: "Codebridge Academy",
+    url: "https://codebridgecademy.com/",
     period: "Training role",
     status: "TRAINED",
     mode: "Software academy",
     scope:
       "Training learners in software development through a company focused on helping people build practical coding and technology skills.",
     evidence: ["Software training", "Practical coding", "Learner support"],
+  },
+  {
+    role: "Certificates and credentials",
+    context: "Certification Body",
+    period: "Credential board",
+    status: "CERTIFIED",
+    mode: "Certification body",
+    scope:
+      "A collected proof board for digital skills, ICDL modules, project management, leadership, AI, cloud, analytics, and professional learning milestones.",
+    evidence: ["Digital skills", "ICDL modules", "Professional learning"],
+    credentialHighlights: [
+      {
+        label: "DSE",
+        value: "Digital employment",
+        detail: "Mastercard Foundation and DOT Rwanda",
+      },
+      {
+        label: "ICDL",
+        value: "10 modules",
+        detail: "Office, security, AI, cloud, analytics, and e-commerce",
+      },
+      {
+        label: "DPro",
+        value: "Project management",
+        detail: "Humentum Modules 1 and 2",
+      },
+      {
+        label: "HP LIFE",
+        value: "4 courses",
+        detail: "Leadership, AI, critical thinking, and agile delivery",
+      },
+    ],
+    certificates: [
+      {
+        title: "Digital Skills for Employment (DSE)",
+        issuer: "Mastercard Foundation and DOT Rwanda",
+        detail:
+          "Digital employability training covering practical workplace technology skills.",
+      },
+      {
+        title: "ICDL - Computer and Online Essentials",
+        issuer: "ICDL",
+        detail:
+          "Windows 10, Chrome, and Office 365 essentials module completed on 27/01/2026.",
+      },
+      {
+        title: "ICDL - Documents",
+        issuer: "ICDL",
+        detail:
+          "Microsoft Office 365 documents module completed on 04/02/2026.",
+      },
+      {
+        title: "ICDL - Cyber Security",
+        issuer: "ICDL",
+        detail: "Cyber Security v2.0 module completed on 04/02/2026.",
+      },
+      {
+        title: "ICDL - Artificial Intelligence",
+        issuer: "ICDL",
+        detail: "Artificial Intelligence v1.0 module completed on 05/02/2026.",
+      },
+      {
+        title: "ICDL - E-Commerce",
+        issuer: "ICDL",
+        detail: "E-Commerce v1.0 module completed on 05/02/2026.",
+      },
+      {
+        title: "ICDL - Cloud Computing",
+        issuer: "ICDL",
+        detail: "Cloud Computing v1.0 module completed on 05/02/2026.",
+      },
+      {
+        title: "ICDL - Teamwork",
+        issuer: "ICDL",
+        detail: "Teamwork v1.0 module completed on 05/02/2026.",
+      },
+      {
+        title: "ICDL - Data Analytics",
+        issuer: "ICDL",
+        detail:
+          "Microsoft Office 2016 data analytics module completed on 07/02/2026.",
+      },
+      {
+        title: "ICDL - Spreadsheets",
+        issuer: "ICDL",
+        detail:
+          "Microsoft Office 365 spreadsheets module completed on 07/02/2026.",
+      },
+      {
+        title: "ICDL - Presentation Advanced",
+        issuer: "ICDL",
+        detail:
+          "Microsoft Office 365 advanced presentations module completed on 10/02/2026.",
+      },
+      {
+        title: "DPro Project Management - Modules 1 and 2",
+        issuer: "Humentum",
+        detail:
+          "Project management learning focused on structured delivery and nonprofit development work.",
+      },
+      {
+        title: "Effective Leadership",
+        issuer: "HP LIFE",
+        detail: "Leadership course completed in 2025.",
+      },
+      {
+        title: "Critical Thinking in the AI Era",
+        issuer: "HP LIFE",
+        detail: "AI-era critical thinking course completed in 2026.",
+      },
+      {
+        title: "AI for Business Professionals",
+        issuer: "HP LIFE",
+        detail: "Business-focused artificial intelligence course completed in 2026.",
+      },
+      {
+        title: "Agile Project Management",
+        issuer: "HP LIFE",
+        detail: "Agile project management course completed in 2026.",
+      },
+      {
+        title: "Certified Codebridge Trainer",
+        issuer: "Codebridge Academy",
+        url: "https://codebridgecademy.com/",
+        detail: "Certified trainer credential for practical software development learning.",
+      },
+      {
+        title: "Program Completion",
+        issuer: "St Kizito Save TSS",
+        detail: "Completed technical education program milestone shown on the CV profile.",
+      },
+    ],
   },
   {
     role: "Co-founder and Software Developer",
