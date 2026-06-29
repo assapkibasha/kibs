@@ -2262,6 +2262,25 @@ input {
   background: var(--cc-white);
 }
 
+.site-footer {
+  border-top: 1px solid var(--cc-soft-border);
+  padding: 1.1rem clamp(1rem, 7vw, 6rem) 1.35rem;
+  background:
+    linear-gradient(90deg, rgba(255, 211, 0, 0.06), transparent 38%),
+    var(--cc-black);
+}
+
+.site-footer p {
+  width: min(68rem, 100%);
+  margin: 0 auto;
+  color: var(--cc-muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.45;
+  text-align: center;
+}
+
 @media (max-width: 1040px) {
   .portfolio-nav nav {
     display: none;

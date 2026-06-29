@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
@@ -59,6 +59,10 @@ import {
   skillGroups,
 } from "@/data/portfolio";
 import { MorphingNavMenu } from "@/components/ui/morphing-nav-menu";
+
+const emptySubscribe = () => () => {};
+const getCurrentYear = (): number | null => new Date().getFullYear();
+const getServerYear = (): number | null => null;
 
 const subjects = [
   { label: "Full stack systems", icon: Blocks },
@@ -275,6 +279,11 @@ export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeNavHref, setActiveNavHref] = useState("");
   const [certificateIndex, setCertificateIndex] = useState(0);
+  const currentYear = useSyncExternalStore(
+    emptySubscribe,
+    getCurrentYear,
+    getServerYear,
+  );
   const heroProof = featuredProjects[1] ?? featuredProjects[0];
   const heroProofPoint = heroProof.proofPoints[0];
 
@@ -904,6 +913,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <footer className="site-footer">
+        <p>
+          &copy; {currentYear ?? ""} Ntsinzi Francois. All rights reserved.
+        </p>
+      </footer>
     </main>
   );
 }
