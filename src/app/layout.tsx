@@ -17,7 +17,7 @@ const robotoMono = Roboto_Mono({
 export const metadata: Metadata = {
   title: "Ntsinzi Francois | Developer Portfolio",
   description:
-    "portfolio for Ntsinzi Francois, a Full Stack Developer, Flutter Developer, and Creative Frontend Engineer.",
+    "Ntsinzi Francois, a Full Stack Developer, Flutter Developer, and Creative Frontend Engineer.",
 };
 
 export const viewport: Viewport = {
